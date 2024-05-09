@@ -171,7 +171,25 @@ def predict_organisation():
     if form.validate_on_submit():
         file = form.file.data # First grab the file
         if file and allowed_file(file.filename):
-            file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename))) # Then save the file
+            
+            # file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename))) # Then save the file
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+
+
+            df = pd.read_csv(file_path)
+            preporocessed_data = preprocessing_data(df)
+
+            print(preporocessed_data)
+
+            data_scaled = scaler.transform(preporocessed_data)
+
+            prediction = regmodel.predict(data_scaled)
+
+            print(f"The prediction is likely to be {prediction}")
+
+
             return "File has been uploaded."
         else:
             flash("Only CSV files are allowed.")
