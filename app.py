@@ -1,14 +1,19 @@
 import pickle
 import secrets
-from flask import Flask, request, app, jsonify, url_for, render_template
+from flask import Flask, request, app, jsonify, url_for, render_template, redirect
 import numpy as np
 import pandas as pd
+import os
+from werkzeug.utils import secure_filename
 from sklearn.preprocessing import LabelEncoder
 from flask_bootstrap import Bootstrap5
+from datetime import datetime
 
 from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import  StringField, IntegerField, SelectField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import  StringField, IntegerField, SelectField, SubmitField,FileField
+from wtforms.validators import DataRequired, Length,  InputRequired
+from flask import flash
+
 
 app = Flask(__name__)
 
@@ -19,11 +24,17 @@ bootstrap = Bootstrap5(app)
 # Flask-WTF requires this line
 csrf = CSRFProtect(app)
 
+app.config['UPLOAD_FOLDER'] = 'input'
 
 regmodel = pickle.load(open('financial_inclusion_reg_model.pkl', 'rb'))
 scaler = pickle.load(open('scaling.pkl', 'rb'))
 model_columns = pickle.load(open('model_columns.pkl', 'rb'))
 
+ALLOWED_EXTENSIONS = set(['csv'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 class BankAccountForm(FlaskForm):
@@ -40,6 +51,11 @@ class BankAccountForm(FlaskForm):
     education_level = StringField('Education Level', validators=[DataRequired()])
     job_type = StringField('Job Type', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class UploadFileForm(FlaskForm):
+    file = FileField("File", validators=[InputRequired()])
+    submit = SubmitField("Upload File")
 
 @app.route('/')
 def home():
@@ -102,7 +118,7 @@ def extract_form_data(form):
 
 csrf = CSRFProtect(app)
 
-@csrf.exempt  # Exempt this route from CSRF protection
+
 @app.route('/predict_api', methods=['POST'])
 def predict_api():
     data = request.json
@@ -151,8 +167,17 @@ def predict_individual():
 
 @app.route('/organisation', methods=['GET','POST'])
 def predict_organisation():
-    
-    return render_template('organisational_prediction.html')
+    form = UploadFileForm()
+    if form.validate_on_submit():
+        file = form.file.data # First grab the file
+        if file and allowed_file(file.filename):
+            file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename))) # Then save the file
+            return "File has been uploaded."
+        else:
+            flash("Only CSV files are allowed.")
+            return "File has been declined."
+    return render_template('organisational_prediction.html', form=form)
+
 
 
     

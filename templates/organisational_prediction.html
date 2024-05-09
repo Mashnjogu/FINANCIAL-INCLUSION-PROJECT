@@ -1,28 +1,24 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
 
-
-{% block title %}Organisational Prediction{% endblock title %}
+{% block title %}Home{% endblock title %}
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <h1 class="text-center">Please upload your organisational data</h1>
             <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center">Organisational Prediction</h3>
-                </div>
-                <div class="card-body">
-                    <p class="text-center">Please upload the Excel or CSV file containing organisational data.</p>
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <input type="file" name="file" class="form-control-file">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <div class="card-body text-center">
+                    <h5 class="card-title">Choose a csv file</h5>
+                    <form method='POST' enctype='multipart/form-data'>
+                        {{ form.hidden_tag() }}
+                        {{ render_form(form) }}
+                        
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
