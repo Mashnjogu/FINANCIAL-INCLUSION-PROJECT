@@ -1,5 +1,6 @@
 # UNLOCKING FINANCIAL INCLUSION IN EAST AFRICA.
-![image](https://github.com/MedTechBro/FINANCIAL-INCLUSION-PROJECT/assets/151729172/a0aa560f-106c-4a0b-8916-a93ba3842808)
+
+![alt text](image-3.png)
 
 ## Team Members:
    1. Jeremy Ngugi
@@ -36,8 +37,6 @@ The lack of financial inclusion in East Africa poses significant challenges to e
 - Exploratory Data Analysis
 - Data Preprocessing
 - Modelling
-- Training final model on full dataset
-- Future Improvements
 - Conclusions
 - Recommendations
 
