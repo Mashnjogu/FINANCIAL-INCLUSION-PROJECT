@@ -10,7 +10,10 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h5 class="card-title ">Bank Account Prediction Form</h5>
+                    {% if request.method == 'GET' %}
+                    {{ form.hidden_tag() }}
                     {{ render_form(form) }}
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import  StringField, IntegerField, SelectField, SubmitField,FileField
 from wtforms.validators import DataRequired, Length,  InputRequired
 from flask import flash
+from flask import session
 
 
 app = Flask(__name__)
@@ -156,12 +157,16 @@ def predict_individual():
 
         prediction = regmodel.predict(data_scaled)
 
-        
+        if prediction == 1:
+            print("You qualify to open a bank account")
+        elif prediction == 0:
+            print("You do not qualify to open a bank account")
+
+        prediction_message = "Congratulations 🎉, you qualify to open a bank account" if prediction == 1 else "Sorry 🙁, do not qualify to open a bank account"
 
         print(f"The prediction is likely to be {prediction}")
 
-        
-        return 'Form submitted successfully'
+        return  redirect(url_for('result', prediction_message=prediction_message))
     return render_template('individual_prediction.html', form=form)
 
 
@@ -189,14 +194,103 @@ def predict_organisation():
 
             print(f"The prediction is likely to be {prediction}")
 
+            new_dataset = create_predicted_dataset(prediction, df)
 
-            return "File has been uploaded."
+            # Calculate location distribution
+            
+            distributions = [
+                display_location_distribution(new_dataset),
+                display_country_distribution(new_dataset),
+                display_cellphone_access_distribution(new_dataset),
+                display_marital_relationship_distribution(new_dataset),
+                display_job_income_distribution(new_dataset)
+            ]
+            
+           # Convert distributions to string format
+            distribution_strings = ['&'.join([f"{key}={value}" for key, value in dist.items()]) for dist in distributions]
+
+            # Concatenate distribution strings
+            all_distributions_str = ','.join(distribution_strings)
+            
+
+            return redirect(url_for('organisation_result',all_distributions_str=all_distributions_str))
+        
         else:
             flash("Only CSV files are allowed.")
             return "File has been declined."
     return render_template('organisational_prediction.html', form=form)
 
+def create_predicted_dataset(prediction_score, df):
+    predicted_labels_df = pd.DataFrame(prediction_score, columns = ['predicted_label'])
+    merged_dataset = pd.concat([df, predicted_labels_df], axis=1)
+    return merged_dataset
 
+#location
+def display_location_distribution(dataset):
+     location_distribution = dataset[dataset['predicted_label'] == 1]['location_type'].value_counts(normalize=True)
+     location_dict = location_distribution.to_dict()
+     return location_dict
+
+#country
+def display_country_distribution(dataset):
+    country_distribution = dataset[dataset['predicted_label'] == 1]['country'].value_counts(normalize=True)
+    country_distribution = country_distribution.to_dict()
+    return country_distribution
+
+#Access to Cellphone  Services
+def display_cellphone_access_distribution(dataset):
+    access_distribution = dataset[dataset['predicted_label'] == 1]['cellphone_access'].value_counts(normalize=True)
+    access_dict = access_distribution.to_dict()
+    return access_dict
+
+#Marital Status 
+def display_marital_relationship_distribution(dataset):
+    marital_relationship_distribution = dataset[dataset['predicted_label'] == 1]['marital_status'].value_counts(normalize=True)
+    marital_relationship_dict = marital_relationship_distribution.to_dict()
+    return marital_relationship_dict
+
+#Job Type
+def display_job_income_distribution(dataset):
+    job_income_distribution = dataset[dataset['predicted_label'] == 1]['job_type'].value_counts(normalize=True)
+    job_income_dict = job_income_distribution.to_dict()
+    return job_income_dict
+
+@app.route('/result')
+def result():
+    prediction_message = request.args.get('prediction_message')
+    return render_template('result.html', prediction_message=prediction_message)
+
+# @app.route('/organisation_result')
+# def organisation_result():
+#     distributions_str = request.args.get('distributions')
+#     distributions = distributions_str.split(',')
+#     return render_template('organisation_result.html', distributions=distributions )
+
+@app.route('/organisation_result')
+def organisation_result():
+    distributions_str = request.args.get('all_distributions_str')
+    
+    # Split the string into key-value pairs
+    distributions_list = distributions_str.split('&')
+    
+    # Create a dictionary to store the distributions
+    distributions = {}
+    for item in distributions_list:
+        parts = item.split('=')
+        if len(parts) == 2:
+            key, value = parts
+            distributions[key] = float(value) * 100  # Convert value to percentage
+        else:
+            print(f"Ignoring malformed distribution: {item}")
+    
+    # Format the distributions
+    formatted_distributions = [f"{key}: {value:.2f}%" for key, value in distributions.items()]
+    
+    return render_template('organisation_result.html', distributions=formatted_distributions)
+
+
+
+    
 
     
 if __name__ == "__main__":
