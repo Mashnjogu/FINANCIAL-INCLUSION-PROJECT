@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block title %}Organisational Prediction{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Organisational Prediction</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">Please upload the Excel or CSV file containing organisational data.</p>
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" name="file" class="form-control-file">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

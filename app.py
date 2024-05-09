@@ -1,12 +1,45 @@
 import pickle
+import secrets
 from flask import Flask, request, app, jsonify, url_for, render_template
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+from flask_bootstrap import Bootstrap5
+
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import  StringField, IntegerField, SelectField, SubmitField
+from wtforms.validators import DataRequired, Length
 
 app = Flask(__name__)
+
+foo = secrets.token_urlsafe(16)
+app.secret_key = foo
+# Bootstrap-Flask requires this line
+bootstrap = Bootstrap5(app)
+# Flask-WTF requires this line
+csrf = CSRFProtect(app)
+
+
 regmodel = pickle.load(open('financial_inclusion_reg_model.pkl', 'rb'))
 scaler = pickle.load(open('scaling.pkl', 'rb'))
+model_columns = pickle.load(open('model_columns.pkl', 'rb'))
+
+
+
+class BankAccountForm(FlaskForm):
+    country = StringField('Country', validators=[DataRequired()])
+    year = IntegerField('Year', validators=[DataRequired()])
+    uniqueid = StringField('Unique ID', validators=[DataRequired()])
+    location_type = SelectField('Location Type', choices=[('Rural', 'Rural'), ('Urban', 'Urban')], validators=[DataRequired()])
+    cellphone_access = SelectField('Cellphone Access', choices=[('Yes', 'Yes'), ('No', 'No')], validators=[DataRequired()])
+    household_size = IntegerField('Household Size', validators=[DataRequired()])
+    age_of_respondent = IntegerField('Age of Respondent', validators=[DataRequired()])
+    gender_of_respondent = SelectField('Gender of Respondent', choices=[('Male', 'Male'), ('Female', 'Female')], validators=[DataRequired()])
+    relationship_with_head = StringField('Relationship with Head', validators=[DataRequired()])
+    marital_status = StringField('Marital Status', validators=[DataRequired()])
+    education_level = StringField('Education Level', validators=[DataRequired()])
+    job_type = StringField('Job Type', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 @app.route('/')
 def home():
@@ -27,6 +60,8 @@ def preprocessing_data(data):
     
     # One Hot Encoding conversion
     data = pd.get_dummies(data, prefix_sep="_", columns=categ)
+
+    data = data.reindex(columns=model_columns, fill_value=0)
     
     # Convert boolean columns to integers (1 and 0)
     boolean_columns = ["relationship_with_head_Other non-relatives", "job_type_Government Dependent", 
@@ -48,7 +83,26 @@ def preprocessing_data(data):
     
     return data
 
+def extract_form_data(form):
+     data = {
+        "country": form.country.data,
+        "year": form.year.data,
+        "uniqueid": form.uniqueid.data,
+        "location_type": form.location_type.data,
+        "cellphone_access": form.cellphone_access.data,
+        "household_size": form.household_size.data,
+        "age_of_respondent": form.age_of_respondent.data,
+        "gender_of_respondent": form.gender_of_respondent.data,
+        "relationship_with_head": form.relationship_with_head.data,
+        "marital_status": form.marital_status.data,
+        "education_level": form.education_level.data,
+        "job_type": form.job_type.data
+    }
+     return data
 
+csrf = CSRFProtect(app)
+
+@csrf.exempt  # Exempt this route from CSRF protection
 @app.route('/predict_api', methods=['POST'])
 def predict_api():
     data = request.json
@@ -64,9 +118,41 @@ def predict_api():
     print(prediction[0])
 
     prediction_list = prediction.tolist()
-    return jsonify(prediction_list[0])
-    
+    return jsonify(prediction_list)
 
+@app.route('/individual', methods=['GET','POST'])
+def predict_individual():
+    form = BankAccountForm()
+    message = ""
+    if form.validate_on_submit():
+        # Process the form data here
+        data = extract_form_data(form)
+        print(data)
+
+        data_df = pd.DataFrame([data.values()], columns=data.keys())
+        
+    
+        preporocessed_data = preprocessing_data(data_df)
+
+        print(preporocessed_data)
+
+        data_scaled = scaler.transform(preporocessed_data)
+
+        prediction = regmodel.predict(data_scaled)
+
+        
+
+        print(f"The prediction is likely to be {prediction}")
+
+        
+        return 'Form submitted successfully'
+    return render_template('individual_prediction.html', form=form)
+
+
+@app.route('/organisation', methods=['GET','POST'])
+def predict_organisation():
+    
+    return render_template('organisational_prediction.html')
 
 
     
