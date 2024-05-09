@@ -1,7 +1,7 @@
 # UNLOCKING FINANCIAL INCLUSION IN EAST AFRICA.
 ![image](https://github.com/MedTechBro/FINANCIAL-INCLUSION-PROJECT/assets/151729172/a0aa560f-106c-4a0b-8916-a93ba3842808)
 
-### Team Members:
+## Team Members:
    1. Jeremy Ngugi
    2. Alice Mumbi
    3. Dennis Njogu
@@ -77,12 +77,15 @@ Data Balancing with SMOTE: To tackle the class imbalance, we used Synthetic Mino
 
 ## EXPLORATORY DATA ANALYSIS
 
-- Country against ank account:
-![alt text](image.png)
+- Country against bank account:
+
+    ![alt text](image.png)
 - Gender against bank account:
-![alt text](image-1.png)
+
+    ![alt text](image-1.png)
 - Location against bank account:
-![alt text](image-2.png)
+
+    ![alt text](image-2.png)
 
 ## MODELLING
 In our analysis, we employed various machine learning algorithms to predict bank account ownership based on demographic and socioeconomic features. Specifically, we utilized K-Nearest Neighbors (KNN), Decision Trees, and Logistic Regression models.
