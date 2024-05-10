@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Prediction Result{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center">Individual Bank Account Prediction Result</h1>
+
+      <div class="alert alert-primary" role="alert">
+        {{ prediction_message }}
+      </div>
+      <a href="{{ url_for('predict_individual') }}" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

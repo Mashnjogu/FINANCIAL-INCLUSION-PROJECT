@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Organisation Result{% endblock title %}
+
+{% block content %}
+<style>
+  /* Custom CSS styles */
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    color: #333;
+  }
+
+  .list-group-item {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+  }
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center mb-4">Characteristic Proportion of Those Who Can Open a Bank Account</h1>
+          <ul class="list-group">
+            {% for distribution in distributions %}
+              <li class="list-group-item">{{ distribution }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="mt-3 text-center">
+        <a href="{{ url_for('predict_organisation') }}" class="btn btn-primary">Choose Another File</a>
+      </div>
+      <div class="spacer"></div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
