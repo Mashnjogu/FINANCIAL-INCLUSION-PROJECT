@@ -113,3 +113,6 @@ Logistic Regression was applied after scaling the features using StandardScaler.
 3.	Accessibility Improvement: Based on the accessibility assessment, consider investing in infrastructure improvements such as building new bank branches or enhancing transportation networks to make banking services more accessible to underserved communities.
 4.	Employment-Based Strategies: Develop strategies to target different employment sectors identified in the analysis. For example, offering specialized financial products for self-employed individuals or providing financial literacy programs for farmers and fishermen.
 5.	Gender-Specific Initiatives: Given the gender disparity in bank account ownership revealed in the analysis, implement targeted initiatives to promote financial inclusion among women. This could involve providing women with access to microfinance loans or creating women-focused financial empowerment programs.
+
+## TEST CSV FILE
+Please use the Test.csv to demo the model or create dummy data with the same columns as with Test.csv
