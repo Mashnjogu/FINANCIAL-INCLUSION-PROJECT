@@ -15,7 +15,6 @@ from wtforms.validators import DataRequired, Length,  InputRequired
 from flask import flash
 from flask import session
 
-
 app = Flask(__name__)
 
 foo = secrets.token_urlsafe(16)
