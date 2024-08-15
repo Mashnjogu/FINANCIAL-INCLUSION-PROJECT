@@ -1,8 +1,9 @@
-aiobotocore @ file:///C:/b/abs_1c1a_vjay2/croot/aiobotocore_1682537737724/work
+aiobotocore==2.13.2
 aiofiles @ file:///C:/b/abs_9ex6mi6b56/croot/aiofiles_1683773603390/work
-aiohttp @ file:///C:/b/abs_b78zt6vo64/croot/aiohttp_1694181126607/work
-aioitertools @ file:///tmp/build/80754af9/aioitertools_1607109665762/work
-aiosignal @ file:///tmp/build/80754af9/aiosignal_1637843061372/work
+aiohappyeyeballs==2.3.5
+aiohttp==3.10.3
+aioitertools==0.11.0
+aiosignal==1.3.1
 aiosqlite @ file:///C:/b/abs_9djc_0pyi3/croot/aiosqlite_1683773915844/work
 alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
 anaconda-anon-usage @ file:///C:/b/abs_f4tsjyl9va/croot/anaconda-anon-usage_1695310457827/work
@@ -21,7 +22,7 @@ astropy @ file:///C:/ci_311_rebuilds/astropy_1678996071858/work
 asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
 async-timeout @ file:///C:/ci_311/async-timeout_1676431518331/work
 atomicwrites==1.4.0
-attrs @ file:///C:/ci_311/attrs_1676422272484/work
+attrs==24.2.0
 Automat @ file:///tmp/build/80754af9/automat_1600298431173/work
 autopep8 @ file:///opt/conda/conda-bld/autopep8_1650463822033/work
 Babel @ file:///C:/ci_311/babel_1676427169844/work
@@ -37,7 +38,7 @@ bleach @ file:///opt/conda/conda-bld/bleach_1641577558959/work
 bokeh @ file:///C:/b/abs_e5qs_0dl2w/croot/bokeh_1690546119144/work
 boltons @ file:///C:/ci_311/boltons_1677729932371/work
 Bootstrap-Flask==2.4.0
-botocore @ file:///C:/b/abs_01gwdn34ju/croot/botocore_1682528022942/work
+botocore==1.34.131
 Bottleneck @ file:///C:/ci_311/bottleneck_1676500016583/work
 brotlipy==0.7.0
 certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1707022139797/work/certifi
@@ -90,7 +91,7 @@ flake8 @ file:///C:/ci_311/flake8_1678376624746/work
 Flask @ file:///C:/ci_311/flask_1676436667658/work
 Flask-WTF==1.2.1
 fonttools==4.25.0
-frozenlist @ file:///C:/ci_311/frozenlist_1676428131576/work
+frozenlist==1.4.1
 fsspec @ file:///C:/b/abs_f9arcwflp9/croot/fsspec_1682526006955/work
 future @ file:///C:/ci_311_rebuilds/future_1678998246262/work
 gensim @ file:///C:/ci_311/gensim_1677743037820/work
@@ -102,7 +103,7 @@ holoviews @ file:///C:/b/abs_fa7afixkhc/croot/holoviews_1693378101313/work
 huggingface-hub @ file:///C:/b/abs_46tn6fu5ho/croot/huggingface_hub_1686693723427/work
 hvplot @ file:///C:/b/abs_2b13wifauw/croot/hvplot_1685998632349/work
 hyperlink @ file:///tmp/build/80754af9/hyperlink_1610130746837/work
-idna @ file:///C:/ci_311/idna_1676424932545/work
+idna==3.7
 imagecodecs @ file:///C:/b/abs_e2g5zbs1q0/croot/imagecodecs_1695065012000/work
 imageio @ file:///C:/ci_311/imageio_1678373794394/work
 imagesize @ file:///C:/ci_311/imagesize_1676431905616/work
@@ -126,7 +127,7 @@ jedi @ file:///C:/ci_311/jedi_1679427407646/work
 jellyfish @ file:///C:/b/abs_50kgvtnrbj/croot/jellyfish_1695193564091/work
 Jinja2 @ file:///C:/ci_311/jinja2_1676424968965/work
 jinja2-time @ file:///opt/conda/conda-bld/jinja2-time_1649251842261/work
-jmespath @ file:///Users/ktietz/demo/mc3/conda-bld/jmespath_1630583964805/work
+jmespath==1.0.1
 joblib @ file:///C:/b/abs_1anqjntpan/croot/joblib_1685113317150/work
 json5 @ file:///tmp/build/80754af9/json5_1624432770122/work
 jsonpatch @ file:///tmp/build/80754af9/jsonpatch_1615747632069/work
@@ -175,7 +176,7 @@ mkl-service==2.4.0
 more-itertools @ file:///tmp/build/80754af9/more-itertools_1637733554872/work
 mpmath @ file:///C:/b/abs_7833jrbiox/croot/mpmath_1690848321154/work
 msgpack @ file:///C:/ci_311/msgpack-python_1676427482892/work
-multidict @ file:///C:/ci_311/multidict_1676428396308/work
+multidict==6.0.5
 multipledispatch @ file:///C:/ci_311/multipledispatch_1676442767760/work
 multiprocess @ file:///C:/ci_311/multiprocess_1676442808395/work
 munkres==1.1.4
@@ -254,7 +255,7 @@ pyrsistent @ file:///C:/ci_311/pyrsistent_1676422695500/work
 PySocks @ file:///C:/ci_311/pysocks_1676425991111/work
 pytest @ file:///C:/b/abs_48heoo_k8y/croot/pytest_1690475385915/work
 python-box @ file:///home/conda/feedstock_root/build_artifacts/python-box_1648897282893/work
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+python-dateutil==2.9.0.post0
 python-dotenv @ file:///C:/ci_311/python-dotenv_1676455170580/work
 python-json-logger @ file:///C:/b/abs_cblnsm6puj/croot/python-json-logger_1683824130469/work
 python-lsp-black @ file:///C:/ci_311/python-lsp-black_1678721855627/work
@@ -299,7 +300,7 @@ seaborn @ file:///C:/ci_311/seaborn_1676446547861/work
 Send2Trash @ file:///tmp/build/80754af9/send2trash_1632406701022/work
 service-identity @ file:///Users/ktietz/demo/mc3/conda-bld/service_identity_1629460757137/work
 sip @ file:///C:/ci_311/sip_1676427825172/work
-six @ file:///tmp/build/80754af9/six_1644875935023/work
+six==1.16.0
 smart-open @ file:///C:/ci_311/smart_open_1676439339434/work
 sniffio @ file:///C:/ci_311/sniffio_1676425339093/work
 snowballstemmer @ file:///tmp/build/80754af9/snowballstemmer_1637937080595/work
@@ -346,7 +347,7 @@ tzdata @ file:///croot/python-tzdata_1690578112552/work
 uc-micro-py @ file:///C:/ci_311/uc-micro-py_1676457695423/work
 ujson @ file:///C:/ci_311/ujson_1676434714224/work
 Unidecode @ file:///tmp/build/80754af9/unidecode_1614712377438/work
-urllib3 @ file:///C:/b/abs_889_loyqv4/croot/urllib3_1686163174463/work
+urllib3==2.2.2
 w3lib @ file:///Users/ktietz/demo/mc3/conda-bld/w3lib_1629359764703/work
 watchdog @ file:///C:/ci_311/watchdog_1676457923624/work
 wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
@@ -356,7 +357,7 @@ Werkzeug @ file:///C:/b/abs_8578rs2ra_/croot/werkzeug_1679489759009/work
 whatthepatch @ file:///C:/ci_311/whatthepatch_1678402578113/work
 widgetsnbextension @ file:///C:/b/abs_882k4_4kdf/croot/widgetsnbextension_1679313880295/work
 win-inet-pton @ file:///C:/ci_311/win_inet_pton_1676425458225/work
-wrapt @ file:///C:/ci_311/wrapt_1676432805090/work
+wrapt==1.16.0
 WTForms==3.1.2
 xarray @ file:///C:/b/abs_5bkjiynp4e/croot/xarray_1689041498548/work
 xlwings @ file:///C:/ci_311_rebuilds/xlwings_1679013429160/work
@@ -364,7 +365,7 @@ xxhash @ file:///C:/ci_311/python-xxhash_1676446168786/work
 xyzservices @ file:///C:/ci_311/xyzservices_1676434829315/work
 y-py @ file:///C:/b/abs_b7f5go6r0j/croot/y-py_1683662173571/work
 yapf @ file:///tmp/build/80754af9/yapf_1615749224965/work
-yarl @ file:///C:/ci_311/yarl_1676432870023/work
+yarl==1.9.4
 ypy-websocket @ file:///C:/b/abs_4e65ywlnv8/croot/ypy-websocket_1684172103529/work
 zict @ file:///C:/b/abs_fc7elavmem/croot/zict_1682698759288/work
 zipp @ file:///C:/ci_311/zipp_1676426100491/work
